@@ -4,12 +4,12 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'dane',
   connector: 'mongodb',
-  url: 'mongodb+srv://uwpisz:hwpisz@cluster0.ajwo5.mongodb.net/baza',
-  host: 'cluster0.ajwo5.mongodb.net/baza',
+  url: 'mongodb+srv://mariusz:Nana1974@cluster0.ajwo5.mongodb.net/cola',
+  host: 'cluster0.ajwo5.mongodb.net/cola',
   port: 27017,
-  user: 'wpisz',
-  password: 'Nwpisz',
-  database: 'nazwa',
+  user: 'mariusz',
+  password: 'Nana1974',
+  database: 'cola',
   useNewUrlParser: true
 };
 
