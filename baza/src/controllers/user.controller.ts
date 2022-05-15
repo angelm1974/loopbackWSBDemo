@@ -5,7 +5,7 @@ import {
   TokenServiceBindings,
   User,
   UserRepository,
-  UserServiceBindings,
+  UserServiceBindings
 } from '@loopback/authentication-jwt';
 import {inject} from '@loopback/core';
 import {model, property, repository} from '@loopback/repository';
@@ -14,7 +14,7 @@ import {
   getModelSchemaRef,
   post,
   requestBody,
-  SchemaObject,
+  SchemaObject
 } from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {genSalt, hash} from 'bcryptjs';
@@ -45,7 +45,7 @@ const CredentialsSchema: SchemaObject = {
 };
 
 export const CredentialsRequestBody = {
-  description: 'The input of login function',
+  description: 'Podaj dane do logowania',
   required: true,
   content: {
     'application/json': {schema: CredentialsSchema},
@@ -61,7 +61,7 @@ export class UserController {
     @inject(SecurityBindings.USER, {optional: true})
     public user: UserProfile,
     @repository(UserRepository) protected userRepository: UserRepository,
-  ) {}
+  ) { }
 
   @post('/users/login', {
     responses: {

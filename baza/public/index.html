@@ -73,10 +73,70 @@
       }
     }
   </style>
+
+  <script>
+    /**
+     * Submit the upload form
+     */
+    function setupUploadForm() {
+      const formElem = document.getElementById('uploadForm');
+      formElem.onsubmit = async e => {
+        e.preventDefault();
+
+        const res = await fetch('/files', {
+          method: 'POST',
+          body: new FormData(formElem),
+        });
+
+        const body = await res.json();
+        console.log('Response from upload', body);
+
+        await fetchFiles();
+      };
+    }
+
+    /**
+     * List uploaded files
+     */
+    async function fetchFiles() {
+      const res = await fetch('/files');
+      const files = await res.json();
+      console.log('Response from list', files);
+      const list = files.map(
+        f => `<li><a href="/files/${f}">${f}</a></li>\n`,
+      );
+      document.getElementById('fileList').innerHTML = list.join('');
+    }
+
+    async function init() {
+      setupUploadForm();
+      await fetchFiles();
+    }
+  </script>
 </head>
 
-<body>
+<body onload="init();">
   <div class="info">
+    <h1>File upload and download</h1>
+
+    <div id="upload">
+      <h3>Upload files</h3>
+      <form id="uploadForm">
+        <label for="files">Select files:</label>
+        <input type="file" id="files" name="files" multiple /><br /><br />
+        <label for="note">Note:</label>
+        <input type="text" name="note" id="note" placeholder="Note about the files" />
+        <br /><br />
+        <input type="submit" />
+      </form>
+    </div>
+
+    <div id="download">
+      <h3>Download files</h3>
+      <ul id="fileList"></ul>
+      <button onclick="fetchFiles()">Refresh</button>
+    </div>
+
     <h1>baza</h1>
     <p>Version 1.0.0</p>
 
